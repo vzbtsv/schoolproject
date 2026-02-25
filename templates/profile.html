@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}Профиль — {{ username }}{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="profile-header">
+        <h1>Личный кабинет</h1>
+        <p class="welcome-text">Добро пожаловать, {{ username }}!</p>
+    </div>
+
+    <div class="profile-content">
+        <div class="profile-card">
+            <h2>Информация о профиле</h2>
+            <div class="info-item">
+                <span class="label">Имя пользователя:</span>
+                <span class="value">{{ username }}</span>
+            </div>
+            <div class="info-item">
+                <span class="label">Дата регистрации:</span>
+                <span class="value">{{ created_at }}</span>
+            </div>
+        </div>
+
+        <div class="stats-section">
+            <h2>Ваша статистика</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value">{{ stats.total_tasks }}</div>
+                    <div class="stat-label">Выполнено заданий</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">{{ stats.correct_answers }}</div>
+                    <div class="stat-label">Правильных ответов</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">{{ stats.accuracy }}%</div>
+                    <div class="stat-label">Точность</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">{{ completed_tasks|length }} / {{ total_tasks }}</div>
+                    <div class="stat-label">Выполнено из доступных</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="completed-tasks-section">
+            <h2>Выполненные задания ({{ completed_tasks|length }})</h2>
+            {% if completed_tasks %}
+            <div class="tasks-grid">
+                {% for task in completed_tasks %}
+                <div class="task-card">
+                    <h3 class="task-title">
+                        <a href="{{ url_for('task_detail', task_id=task.id) }}">
+                            {{ task.title or 'Задание ' ~ task.id }}
+                        </a>
+                    </h3>
+                    <p class="task-description">{{ task.description }}</p>
+                    <div class="task-meta">
+                        <span class="task-difficulty difficulty-{{ task.difficulty }}">{{ task.difficulty }}</span>
+                        <span class="task-type">{{ task.type }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p>Вы ещё не выполнили ни одного задания. Перейдите на <a href="{{ url_for('index') }}">главную</a> и начните тренировку!</p>
+            {% endif %}
+        </div>
+
+
+        <div class="profile-logout-bottom">
+            <a href="{{ url_for('logout') }}" class="btn logout-btn large-logout-btn">Выйти из аккаунта</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

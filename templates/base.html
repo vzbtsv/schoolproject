@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}22 задание{% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Georgia&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-brand">
+            <a href="{{ url_for('index') }}">Тренажер 22 задания ЕГЭ по русскому языку</a>
+        </div>
+
+        <div class="nav-links">
+            <a href="{{ url_for('theory') }}" class="nav-btn">Теория</a>
+
+            {% if current_user %}
+            <div class="user-menu">
+                <span class="username">{{ current_user }}</span>
+                <a href="{{ url_for('profile') }}" class="nav-btn">Профиль</a>
+                <a href="{{ url_for('logout') }}" class="nav-btn logout">Выйти</a>
+            </div>
+            {% else %}
+            <div class="auth-links">
+                <a href="{{ url_for('login') }}" class="nav-btn">Вход</a>
+                <a href="{{ url_for('register') }}" class="nav-btn register">Регистрация</a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<main class="main-content">
+    {% block content %}{% endblock %}
+</main>
+
+
+
+<footer class="footer">
+    <div class="footer-content">
+    </div>
+</footer>
+</body>
+</html>

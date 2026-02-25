@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}Теория — Средства выразительности{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="welcome-section">
+        <h1>Теория по средствам художественной выразительности</h1>
+        <p class="subtitle">Краткий справочник для подготовки к 22-му заданию ЕГЭ по русскому языку</p>
+    </div>
+
+    <div class="tasks-grid" style="grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 30px;">
+        <div class="task-card" style="text-align: center; padding: 40px 20px;">
+            <h2 style="color: #667eea; margin-bottom: 20px;">Лексические средства</h2>
+            <p>Тропы: метафора, эпитет, олицетворение, сравнение и др.</p>
+            <a href="{{ url_for('theory_lexical') }}" class="btn primary-btn" style="margin-top: 20px;">Перейти →</a>
+        </div>
+
+        <div class="task-card" style="text-align: center; padding: 40px 20px;">
+            <h2 style="color: #667eea; margin-bottom: 20px;">Синтаксические средства</h2>
+            <p>Риторические фигуры, повторы, инверсия, парцелляция и др.</p>
+            <a href="{{ url_for('theory_syntactic') }}" class="btn primary-btn" style="margin-top: 20px;">Перейти →</a>
+        </div>
+
+        <div class="task-card" style="text-align: center; padding: 40px 20px;">
+            <h2 style="color: #667eea; margin-bottom: 20px;">Фонетические средства</h2>
+            <p>Аллитерация, ассонанс, звукоподражание.</p>
+            <a href="{{ url_for('theory_phonetic') }}" class="btn primary-btn" style="margin-top: 20px;">Перейти →</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
